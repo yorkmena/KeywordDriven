@@ -1,0 +1,99 @@
+package com.thinksys.configuration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+public class Action_Keywords {
+	
+	public static WebDriver driver;
+	
+	 
+	public  void Launch(String locatorvalue,String browserName)
+	{
+		System.out.println("My val:-"+locatorvalue);
+		if(browserName.equalsIgnoreCase("Firefox"))
+		{
+			System.setProperty("webdriver.gecko.driver", "D:\\Selenium Projects\\KeywordDriven_Framework\\geckodriver.exe");
+			driver = new FirefoxDriver();
+			System.out.println(browserName+" Launched Successfully");
+		}
+		
+		else if(browserName.equalsIgnoreCase("Chrome"))
+		{
+			System.setProperty("webdriver.chrome.driver","D:\\Selenium Projects\\KeywordDriven_Framework\\chromedriver.exe");
+			driver=new ChromeDriver();
+			System.out.println(browserName+" Launched Successfully");
+		}
+		
+		else if(browserName.equalsIgnoreCase("IE"))
+		{
+			System.setProperty("webdriver.IE.driver","D:\\Selenium Projects\\KeywordDriven_Framework\\IEDriverServer.exe");
+			driver=new InternetExplorerDriver();
+			System.out.println(browserName+" Launched Successfully");
+		}
+		
+		}
+	
+	public void GetPage(String pageName,String url)
+	{
+		System.out.println("In method...Val of URL is:- "+url);
+		System.out.println("In method...Val of locatorVal is:- "+pageName);
+		driver.get(url);
+		
+	}
+	
+	public By locatorValue(String locatorTpye, String value) {
+		By by;
+		switch (locatorTpye) {
+		case "id":
+			by = By.id(value);
+			break;
+		case "name":
+			by = By.name(value);
+			break;
+		case "xpath":
+			by = By.xpath(value);
+			break;
+		case "css":
+			by = By.cssSelector(value);
+			break;
+		case "linkText":
+			by = By.linkText(value);
+			break;
+		case "partialLinkText":
+			by = By.partialLinkText(value);
+			break;
+		default:
+			by = null;
+			break;
+		}
+		return by;
+	}
+	
+	public  void EnterText(String locatorType,String locatorValfromExcel,String textValue)
+	{
+		try
+		{
+		By valueOfLocator=locatorValue(locatorType, locatorValfromExcel);
+		
+		System.out.println("Locator Value in Action:- "+ valueOfLocator);
+		System.out.println("Entered Text Value is:-"+textValue);
+		driver.findElement(valueOfLocator).sendKeys(textValue);
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
+	public void Click(String locatorVal,String data)
+	{
+		System.out.println("Locator Val for CLick:-" +locatorVal);
+		System.out.println("Locator Val for CLickData:-" +data);
+		driver.findElement(By.linkText(locatorVal)).click();
+	}
+
+}
