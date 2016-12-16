@@ -10,7 +10,7 @@ public class Action_Keywords {
 	
 	public static WebDriver driver;
 	
-	public  void perform(String ActionKeyword,String locatorType,String locatorValue, String data )
+	public  void performAction(String ActionKeyword,String locatorType,String locatorValue, String data )
 	{
 		switch(ActionKeyword)
 		{

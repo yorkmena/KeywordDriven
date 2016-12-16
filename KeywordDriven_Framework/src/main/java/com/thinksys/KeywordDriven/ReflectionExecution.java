@@ -11,8 +11,8 @@ public class ReflectionExecution {
 	public static void main(String[] args) throws Exception 
 	{
 		int countofDataRows;
-		int countofDataRows1;
-		Action_Keywords a=new Action_Keywords();
+		int countofORRows;
+		//Action_Keywords keywords=new Action_Keywords();
 		
 		//Declaring the path of the Excel file with the name of the Test Script..We will remove the hard coded value afterwards
 		//String sPath = "./keywordDriven_Framework/ExcelTestFiles/TestScript.xlsx";
@@ -20,15 +20,11 @@ public class ReflectionExecution {
 		String orPath= ".\\ExcelTestFiles\\Object Repository.xlsx";
 
 		//Here we are passing the Excel path and SheetName to connect with the Excel file
-		//This method was created in the last chapter of 'Set up Data Engine'
-		
 		countofDataRows=ExcelUtilities.setExcelFilePath(sPath, "TestSteps");
 		System.out.println("count of rows in TestScript Excel :-" +countofDataRows);
-		//It means this loop will execute all the steps mentioned for the test case in Test Steps sheet
-		System.out.println("LONA Framework 1112");
 		
+		//It means this loop will execute all the steps mentioned for the test case in Test Steps sheet
 		for (int iRow = 1;iRow <= countofDataRows;iRow++){
-			//This to get the value of column Action Keyword from the excel
 			countofDataRows=ExcelUtilities.setExcelFilePath(sPath, "TestSteps");
 			String sPageName = ExcelUtilities.getCellData(iRow, 1);
 			String sLocatorName = ExcelUtilities.getCellData(iRow, 2);
@@ -44,20 +40,20 @@ public class ReflectionExecution {
 			//So this statement is doing nothing but calling that piece of code to execute
 			
 			
-			countofDataRows1=ExcelUtilities.setExcelFilePath(orPath, "Login");
-			System.out.println("count of rows in OR Excel :-" +countofDataRows);
+			countofORRows=ExcelUtilities.setExcelFilePath(orPath, "Login");
+			System.out.println("count of rows in OR Excel :-" +countofORRows);
 			
 			String orlocatorType="";
 			String orlocatorValue="";
-		for(int y=1;y<=countofDataRows1;y++){
+		for(int orRow=1;orRow<=countofORRows;orRow++){
 			
-		String orLocatorName= ExcelUtilities.getCellData(y,1);
+		String orLocatorName= ExcelUtilities.getCellData(orRow,1);
 		
 		System.out.println(sLocatorName+"------------"+orLocatorName);
 		if(sLocatorName.equals(orLocatorName))
 		{
-			orlocatorType=ExcelUtilities.getCellData(y, 2);
-			orlocatorValue=ExcelUtilities.getCellData(y, 3);
+			orlocatorType=ExcelUtilities.getCellData(orRow, 2);
+			orlocatorValue=ExcelUtilities.getCellData(orRow, 3);
 			break;
 			//locatorValue=Action_Keywords.locatorValue(orlocatorType, orlocatorValue);	
 		}
@@ -66,7 +62,8 @@ public class ReflectionExecution {
 		//execute_Actions(sActionKeyword,locatorValue,sData);	
 		
 		}
-		a.perform(sActionKeyword,orlocatorType,orlocatorValue,sData);
+		execute_Actions(sActionKeyword,orlocatorType,orlocatorValue,sData);
+		//a.performAction(sActionKeyword,orlocatorType,orlocatorValue,sData);
 		
 			
 		}
@@ -109,8 +106,8 @@ public class ReflectionExecution {
 	
 	{
 	
-		Action_Keywords a=new Action_Keywords();
-		a.perform(sActionKeyword,orlocatorType,orlocatorValue,data );
+		Action_Keywords keywords=new Action_Keywords();
+		keywords.performAction(sActionKeyword,orlocatorType,orlocatorValue,data );
 		
 	}
 
