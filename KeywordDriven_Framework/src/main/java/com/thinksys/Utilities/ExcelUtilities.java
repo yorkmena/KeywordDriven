@@ -20,7 +20,7 @@ public class ExcelUtilities extends Constants {
 public static int setExcelFilePath(String Path,String SheetName) throws Exception {
         FileInputStream ExcelFile = new FileInputStream(Path);
         int iRowNum=0;
-        System.out.println("ABle to acess Excel file");
+        //System.out.println("ABle to acess Excel file");
         ExcelWBook = new XSSFWorkbook(ExcelFile);
         ExcelWSheet = ExcelWBook.getSheet(SheetName);
         
@@ -29,24 +29,38 @@ public static int setExcelFilePath(String Path,String SheetName) throws Exceptio
         	 Row r = ExcelWSheet.getRow(iRowNum);
              if (r != null) {
             	// System.out.println(r.toString());
-            	 System.out.println(iRowNum);
+            	 //System.out.println(iRowNum);
              }
              else
              {
-            	 System.out.println("TOtal value of Rows are:- "+iRowNum);
-             }
-             
+            	// System.out.println("TOtal value of Rows are:- "+iRowNum);
+             }  
         }
         return iRowNum-1;
-        
 }
 
 //This method is to read the test data from the Excel cell
 //In this we are passing parameters/arguments as Row Num and Col Num
-public static String getCellData(int RowNum, int ColNum) throws Exception{
-	  Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-      String CellData = Cell.getStringCellValue();
+public static String getCellData(int RowNum, int ColNum){
+	
+	String CellData;
+	  
+      try{
+      Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+	  CellData = Cell.getStringCellValue();
+      }
+      catch(Exception e)
+      {
+    	  CellData="";
+      }
+	  
+    /* if (CellData.equals(null))
+      {
+    	 CellData="";
+      }*/
+     
       return CellData;
 	}
+
 
 }
