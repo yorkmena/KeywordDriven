@@ -1,7 +1,5 @@
 package com.thinksys.KeywordDriven;
 
-import java.lang.reflect.Method;
-import org.openqa.selenium.By;
 import com.thinksys.Utilities.ExcelUtilities;
 import com.thinksys.configuration.Action_Keywords;
 
