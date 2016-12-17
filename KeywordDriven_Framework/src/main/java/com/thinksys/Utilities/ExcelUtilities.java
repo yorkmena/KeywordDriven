@@ -20,9 +20,14 @@ public class ExcelUtilities extends Constants {
 public static int setExcelFilePath(String Path,String SheetName) throws Exception {
         FileInputStream ExcelFile = new FileInputStream(Path);
         int iRowNum=0;
-        //System.out.println("ABle to acess Excel file");
+        //System.out.println("ABle to access Excel file");
         ExcelWBook = new XSSFWorkbook(ExcelFile);
-        ExcelWSheet = ExcelWBook.getSheet(SheetName);
+       try {
+    	   ExcelWSheet = ExcelWBook.getSheet(SheetName);
+    	   ExcelWSheet.getLastRowNum();
+	} catch (NullPointerException e) {
+		return 0;		
+	}
         
         for(iRowNum=0;iRowNum<=ExcelWSheet.getLastRowNum();iRowNum++)
         {

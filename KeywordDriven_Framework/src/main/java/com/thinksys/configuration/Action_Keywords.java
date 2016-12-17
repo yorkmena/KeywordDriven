@@ -10,7 +10,7 @@ public class Action_Keywords {
 	
 	public static WebDriver driver;
 	
-	public  void performAction(String ActionKeyword,String locatorType,String locatorValue, String data )
+	public  void performAction(String ActionKeyword, String locatorType, String locatorValue, String data)
 	{
 		switch(ActionKeyword)
 		{
@@ -19,12 +19,19 @@ public class Action_Keywords {
 		{
 			GetPage(data);
 		}
+		break;
 		
 		case "EnterText":
 		{
 			EnterText(locatorType,locatorValue,data);
 		}
+		break;
 		
+		case "Click":
+		{
+			click(locatorValue, locatorType);
+		}
+		break;
 		
 		case "Launch":
 		{
@@ -32,7 +39,6 @@ public class Action_Keywords {
 		}
 		
 		}
-		
 	}
 	
 /*	public  void Launch(String locatorvalue,String locatorType,String browserName)
@@ -44,27 +50,23 @@ public class Action_Keywords {
 			driver = new FirefoxDriver();
 			System.out.println(browserName+" Launched Successfully");
 		}
-		
 		else if(browserName.equalsIgnoreCase("Chrome"))
 		{
 			System.setProperty("webdriver.chrome.driver",".\\Drivers\\chromedriver.exe");
 			driver=new ChromeDriver();
 			System.out.println(browserName+" Launched Successfully");
 		}
-		
 		else if(browserName.equalsIgnoreCase("IE"))
 		{
 			System.setProperty("webdriver.IE.driver",".\\Drivers\\IEDriverServer.exe");
 			driver=new InternetExplorerDriver();
 			System.out.println(browserName+" Launched Successfully");
 		}
-		
 		}*/
 	
 	
-	public  void Launch(String browserName)
+	public void Launch(String browserName)
 	{
-		
 		if(browserName.equalsIgnoreCase("Firefox"))
 		{
 			System.setProperty("webdriver.gecko.driver", ".\\Drivers\\geckodriver.exe");
@@ -86,7 +88,7 @@ public class Action_Keywords {
 			System.out.println(browserName+" Launched Successfully");
 		}
 		
-		}
+	}
 	
 	public void GetPage(String url)
 	{
@@ -94,7 +96,6 @@ public class Action_Keywords {
 		System.out.println("In method...Val of locatorVal is:- "+pageName);*/
 		driver.get(url);
 		System.out.println("URL Launched Successfully");
-		
 	}
 	
 	public static By locator(String locatorTpye, String value) {
@@ -125,20 +126,16 @@ public class Action_Keywords {
 		return by;
 	}
 	
-	public void EnterText(String locatorType,String locatorName,String textValue)
+	public void EnterText(String locatorType,String locatorValue,String data)
 	{
 		try
 		{
-		By valueOfLocator=locator(locatorType, locatorName);
-		
-		/*System.out.println("Locator Value in Action:- "+ valueOfLocator);
-		System.out.println("Entered Text Value is:-"+textValue);*/
-		driver.findElement(valueOfLocator).sendKeys(textValue);
+			By valueOfLocator=locator(locatorType, locatorValue);		
+			driver.findElement(valueOfLocator).sendKeys(data);
 		}
 		catch(Exception e)
 		{
-			System.out.println("Enter text not executed.");
-			e.printStackTrace();
+			System.out.println("Enter text is not executed.");
 		}
 	}
 	
@@ -160,11 +157,11 @@ public class Action_Keywords {
 	}*/
 	
 	
-	public void Click(String locatorVal,String locatortype, String data)
+	public void click(String locatorValue,String locatortype)
 	{
 		/*System.out.println("Locator Val for CLick:-" +locatorVal);
 		System.out.println("Locator Val for CLickData:-" +data);*/
-		driver.findElement(By.linkText(locatorVal)).click();
+		driver.findElement(By.xpath(locatorValue)).click();
 	}
 
 }

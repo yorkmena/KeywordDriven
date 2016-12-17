@@ -5,81 +5,61 @@ import com.thinksys.configuration.Action_Keywords;
 
 public class ReflectionExecution {
 	
-
 	public static void main(String[] args) throws Exception 
 	{
-		int countofDataRows;
-		int countofORRows;
-		//Action_Keywords keywords=new Action_Keywords();
-		System.out.println("testing");
+		int countofTestScriptRows=0;
+		int countofORRows=0;
+		
 		//Declaring the path of the Excel file with the name of the Test Script..We will remove the hard coded value afterwards
-		//String sPath = "./keywordDriven_Framework/ExcelTestFiles/TestScript.xlsx";
-		String sPath = ".\\ExcelTestFiles\\TestScript.xlsx";
-		String orPath= ".\\ExcelTestFiles\\Object Repository.xlsx";
+		String scriptPath = ".\\ExcelTestFiles\\TestScript.xlsx";
+		String repositoryPath= ".\\ExcelTestFiles\\Object Repository.xlsx";
+		
+		String orlocatorType="";
+		String orlocatorValue="";
 
 		//Here we are passing the Excel path and SheetName to connect with the Excel file
-		countofDataRows=ExcelUtilities.setExcelFilePath(sPath, "TestSteps");
-		System.out.println("count of rows in TestScript Excel :-" +countofDataRows);
+		countofTestScriptRows=ExcelUtilities.setExcelFilePath(scriptPath, "TestSteps");
+		System.out.println("Count of rows in TestScript Excel: " +countofTestScriptRows);
 		
 		//It means this loop will execute all the steps mentioned for the test case in Test Steps sheet
-		for (int iRow = 1;iRow <= countofDataRows;iRow++){
-			countofDataRows=ExcelUtilities.setExcelFilePath(sPath, "TestSteps");
-			String sPageName = ExcelUtilities.getCellData(iRow, 1);
-			String sLocatorName = ExcelUtilities.getCellData(iRow, 2);
-			String sActionKeyword = ExcelUtilities.getCellData(iRow, 3);
-			String sData= ExcelUtilities.getCellData(iRow, 4);
+		for(int sRow=1; sRow<=countofTestScriptRows; sRow++)
+		{
+			countofTestScriptRows=ExcelUtilities.setExcelFilePath(scriptPath, "TestSteps");
+			String sPageName = ExcelUtilities.getCellData(sRow, 1);
+			String sLocatorName = ExcelUtilities.getCellData(sRow, 2);
+			String sActionKeyword = ExcelUtilities.getCellData(sRow, 3);
+			String sData= ExcelUtilities.getCellData(sRow, 4);
 
-			/*System.out.println("PageNameIs Value is:- "+ sPageName);
-			System.out.println("Locator Value is:- "+ sLocatorName);
-			System.out.println("keyword is:- "+ sActionKeyword);
-			System.out.println("Data is:-"+ sData);
-*/
 			//A new separate method is created with the name 'execute_Actions'
 			//So this statement is doing nothing but calling that piece of code to execute
 			
-			
-			countofORRows=ExcelUtilities.setExcelFilePath(orPath, "Login");
-			System.out.println("count of rows in OR Excel :-" +countofORRows);
-			
-			String orlocatorType="";
-			String orlocatorValue="";
-		for(int orRow=1;orRow<=countofORRows;orRow++){
-			
-		String orLocatorName= ExcelUtilities.getCellData(orRow,1);
-		
-		System.out.println(sLocatorName+"------------"+orLocatorName);
-		if(sLocatorName.equals(orLocatorName))
-		{
-			orlocatorType=ExcelUtilities.getCellData(orRow, 2);
-			orlocatorValue=ExcelUtilities.getCellData(orRow, 3);
-			break;
-			//locatorValue=Action_Keywords.locatorValue(orlocatorType, orlocatorValue);	
-		}
-		
-		
-		//execute_Actions(sActionKeyword,locatorValue,sData);	
-		
-		}
-		execute_Actions(sActionKeyword,orlocatorType,orlocatorValue,sData);
-		//a.performAction(sActionKeyword,orlocatorType,orlocatorValue,sData);
-		
-			
-		}
-				
+			countofORRows=ExcelUtilities.setExcelFilePath(repositoryPath, sPageName);
+			System.out.println("Count of rows in OR Excel: " +countofORRows);
+						
+			for(int orRow=1; orRow<=countofORRows; orRow++)
+			{
+				String orLocatorName= ExcelUtilities.getCellData(orRow,1);
+				System.out.println(sLocatorName+"------------"+orLocatorName);
+				if(sLocatorName.equals(orLocatorName))
+				{
+					orlocatorType=ExcelUtilities.getCellData(orRow, 2);
+					orlocatorValue=ExcelUtilities.getCellData(orRow, 3);
+					break;	
+				}
+			}
+			execute_Actions(sActionKeyword,orlocatorType,orlocatorValue,sData);
+		}		
 	}
 	//This method contains the code to perform some action
 	//As it is completely different set of logic, which revolves around the action only,
 	//It makes sense to keep it separate from the main driver script
 	//This is to execute test step (Action)
 
-/*	private static void execute_Actions(String keyword_used,String locatorVal,String data) throws Exception {
-		
-		
+/*	private static void execute_Actions(String keyword_used,String locatorVal,String data) throws Exception {		
 		if(locatorVal.equals(null))
 		{
 			locatorVal="";
 		}
-
 		Method method[];
 		Action_Keywords actionKeywords = new Action_Keywords();
 		//This will load all the methods of the class 'ActionKeywords' in it.
@@ -101,13 +81,9 @@ public class ReflectionExecution {
 	}*/
 	
 	private static void execute_Actions(String sActionKeyword,String orlocatorType,String orlocatorValue, String data) throws Exception 
-	
 	{
-	
 		Action_Keywords keywords=new Action_Keywords();
-		keywords.performAction(sActionKeyword,orlocatorType,orlocatorValue,data );
-		
+		keywords.performAction(sActionKeyword,orlocatorType,orlocatorValue,data);
 	}
-
 }
 
