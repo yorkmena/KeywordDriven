@@ -182,8 +182,8 @@ public class Action_Keywords {
 	public void selectItemByVisibleText(String locatorValue, String locatorType, String data)
 	{
 		By valueOfLocator=locator(locatorType, locatorValue);
-		WebElement w= driver.findElement(valueOfLocator);
-		Select select=new Select(w);
+		WebElement webelement= driver.findElement(valueOfLocator);
+		Select select=new Select(webelement);
 		select.selectByVisibleText(data);
 		
 	}
