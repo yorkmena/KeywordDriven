@@ -43,35 +43,26 @@ public class Action_Keywords {
 		
 		case "selectItem":
 		{
+			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: "+ data);
 			selectItem(locatorValue, locatorType, data);
 		}
+		break;
 		
+		case "selectItemByIndex":
+		{
+			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: "+ data);
+			selectItemByIndex(locatorValue, locatorType, data);
+		}
+		break;
+		
+		case "selectItemByVisibleText":
+		{
+			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: "+ data);
+			selectItemByVisibleText(locatorValue, locatorType, data);
+		}
+		break;
 		}
 	}
-	
-/*	public  void Launch(String locatorvalue,String locatorType,String browserName)
-	{
-		System.out.println("My val:-"+locatorvalue);
-		if(browserName.equalsIgnoreCase("Firefox"))
-		{
-			System.setProperty("webdriver.gecko.driver", ".\\Drivers\\geckodriver.exe");
-			driver = new FirefoxDriver();
-			System.out.println(browserName+" Launched Successfully");
-		}
-		else if(browserName.equalsIgnoreCase("Chrome"))
-		{
-			System.setProperty("webdriver.chrome.driver",".\\Drivers\\chromedriver.exe");
-			driver=new ChromeDriver();
-			System.out.println(browserName+" Launched Successfully");
-		}
-		else if(browserName.equalsIgnoreCase("IE"))
-		{
-			System.setProperty("webdriver.IE.driver",".\\Drivers\\IEDriverServer.exe");
-			driver=new InternetExplorerDriver();
-			System.out.println(browserName+" Launched Successfully");
-		}
-		}*/
-	
 	
 	public void Launch(String browserName)
 	{
@@ -164,7 +155,6 @@ public class Action_Keywords {
 		}
 	}*/
 	
-	
 	public void click(String locatorValue,String locatortype)
 	{
 		/*System.out.println("Locator Val for CLick:-" +locatorVal);
@@ -172,11 +162,32 @@ public class Action_Keywords {
 		driver.findElement(By.xpath(locatorValue)).click();
 	}
 	
-	
 	public void selectItem(String locatorValue, String locatorType, String data)
 	{
-		WebElement w= driver.findElement(By.xpath(locatorValue));	
+		By valueOfLocator=locator(locatorType, locatorValue);		
+		WebElement w= driver.findElement(valueOfLocator);	
 		Select select=new Select(w);
 		select.selectByValue(data);
 	}
+	
+	public void selectItemByIndex(String locatorValue, String locatorType, String data)
+	{
+		int i=Integer.parseInt(data);
+		By valueOfLocator=locator(locatorType, locatorValue);
+		WebElement w= driver.findElement(valueOfLocator);	
+		Select select=new Select(w);
+		select.selectByIndex(i);
+	}
+	
+	public void selectItemByVisibleText(String locatorValue, String locatorType, String data)
+	{
+		By valueOfLocator=locator(locatorType, locatorValue);
+		WebElement w= driver.findElement(valueOfLocator);
+		Select select=new Select(w);
+		select.selectByVisibleText(data);
+		
+	}
+	
+	
+	
 }

@@ -48,15 +48,28 @@ public static int setExcelFilePath(String Path,String SheetName) throws Exceptio
 //In this we are passing parameters/arguments as Row Num and Col Num
 public static String getCellData(int RowNum, int ColNum){
 	
-	String CellData;
-	  
+	String CellData=null;
+	int cell_type;
+	
       try{
+    	  
       Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-	  CellData = Cell.getStringCellValue();
+      cell_type=Cell.getCellType();
+      if (cell_type==1)
+      {
+    	  CellData = Cell.getStringCellValue();
+      }
+      else if(cell_type==0)
+      {
+	  
+	  CellData=Cell.getNumericCellValue()+"";
+      }
+      
       }
       catch(Exception e)
       {
     	  CellData="";
+    	  e.printStackTrace();
       }
 	  
     /* if (CellData.equals(null))
