@@ -43,21 +43,21 @@ public class Action_Keywords {
 		
 		case "selectItem":
 		{
-			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: "+ data);
+			
 			selectItem(locatorValue, locatorType, data);
 		}
 		break;
 		
 		case "selectItemByIndex":
 		{
-			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: "+ data);
+			
 			selectItemByIndex(locatorValue, locatorType, data);
 		}
 		break;
 		
 		case "selectItemByVisibleText":
 		{
-			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr: "+ data);
+			
 			selectItemByVisibleText(locatorValue, locatorType, data);
 		}
 		break;
