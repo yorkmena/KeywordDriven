@@ -61,6 +61,41 @@ public class Action_Keywords {
 			selectItemByVisibleText(locatorValue, locatorType, data);
 		}
 		break;
+		
+		case "closebrowser":
+		{
+			closebrowser();
+		}
+		break;
+		
+		case "closeallbrowsers":
+		{
+			closeallbrowsers();
+		}
+		break;
+		
+		case "clearbrowsercache":
+		{
+			clearbrowsercache();
+		}
+		break;
+		
+		case "refreshbrowser":
+		{
+			refreshbrowser();
+		}
+		break;
+		
+		case "goforward":
+		{
+			goforward();
+		}
+		
+		case "goback":
+		{
+			goback();
+		}
+		
 		}
 	}
 	
@@ -167,6 +202,7 @@ public class Action_Keywords {
 		By valueOfLocator=locator(locatorType, locatorValue);		
 		WebElement w= driver.findElement(valueOfLocator);	
 		Select select=new Select(w);
+		
 		select.selectByValue(data);
 	}
 	
@@ -182,12 +218,43 @@ public class Action_Keywords {
 	public void selectItemByVisibleText(String locatorValue, String locatorType, String data)
 	{
 		By valueOfLocator=locator(locatorType, locatorValue);
-		WebElement w= driver.findElement(valueOfLocator);
-		Select select=new Select(w);
+		WebElement webelement= driver.findElement(valueOfLocator);
+		Select select=new Select(webelement);
 		select.selectByVisibleText(data);
 		
 	}
 	
+	public void closebrowser()
+	{
+		driver.close();
+	}
 	
+	public void closeallbrowsers()
+	{
+		driver.quit();
+	}
 	
+	public void clearbrowsercache()
+	{
+		driver.manage().deleteAllCookies();
+		System.out.println("Browser cache cleared");
+	}
+	
+	public void refreshbrowser()
+	{
+		driver.navigate().refresh();
+		System.out.println("Browser has been refreshed");
+	}
+	
+	public void goforward()
+	{
+		driver.navigate().forward();
+		System.out.println("Navigated to the next page");
+	}
+	
+	public void goback()
+	{
+		driver.navigate().back();
+		System.out.println("Navigated to the back page");
+	}
 }
