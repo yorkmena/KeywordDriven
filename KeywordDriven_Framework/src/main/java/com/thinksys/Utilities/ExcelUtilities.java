@@ -44,17 +44,39 @@ public static int setExcelFilePath(String Path,String SheetName) throws Exceptio
         return iRowNum-1;
 }
 
+public static int setTestDataFilePath(String PathofTS,String SheetNameofTestData) throws Exception {
+    FileInputStream ExcelFile = new FileInputStream(PathofTS);
+    int colCount=0;
+    //System.out.println("ABle to access Excel file");
+    ExcelWBook = new XSSFWorkbook(ExcelFile);
+  // try {
+    ExcelWSheet = ExcelWBook.getSheet(SheetNameofTestData);
+    Iterator<Row> rowIterator = ExcelWSheet.rowIterator();
+    if (rowIterator.hasNext())
+       {
+           Row headerRow = (Row) rowIterator.next();
+           //get the number of cells in the header row
+           colCount = headerRow.getPhysicalNumberOfCells();
+       }
+       System.out.println("number of cells with data"+colCount);
+ 
+    return colCount-1;
+
+}
+
+
 //This method is to read the test data from the Excel cell
 //In this we are passing parameters/arguments as Row Num and Col Num
 public static String getCellData(int RowNum, int ColNum){
 	
-	String CellData=null;
+	String CellData=" ";
 	int cell_type;
 	
       try{
     	  
       Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
       cell_type=Cell.getCellType();
+      
       if (cell_type==1)
       {
     	  CellData = Cell.getStringCellValue();
@@ -79,6 +101,8 @@ public static String getCellData(int RowNum, int ColNum){
      
       return CellData;
 	}
+
+
 
 
 }

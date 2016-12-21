@@ -57,7 +57,6 @@ public class Action_Keywords {
 		
 		case "selectItemByVisibleText":
 		{
-			
 			selectItemByVisibleText(locatorValue, locatorType, data);
 		}
 		break;
@@ -90,12 +89,13 @@ public class Action_Keywords {
 		{
 			goforward();
 		}
+		break;
 		
 		case "goback":
 		{
 			goback();
 		}
-		
+		break;
 		}
 	}
 	
@@ -227,11 +227,14 @@ public class Action_Keywords {
 	public void closebrowser()
 	{
 		driver.close();
+		System.out.println("Browser Closed");
 	}
+	
 	
 	public void closeallbrowsers()
 	{
 		driver.quit();
+		System.out.println("Browsers Closed");
 	}
 	
 	public void clearbrowsercache()
