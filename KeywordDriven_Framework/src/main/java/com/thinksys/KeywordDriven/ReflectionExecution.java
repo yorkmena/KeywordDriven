@@ -29,7 +29,7 @@ public class ReflectionExecution {
 		
 		int interationCount=Integer.parseInt(ExcelUtilities.getCellData(0, 1));
 		System.out.println("Ineration Count : " +interationCount);
-		for(int itr=0;itr<interationCount;itr++)
+		for(int itr=1;itr<=interationCount;itr++)
 		{
 		//It means this loop will execute all the steps mentioned for the test case in Test Steps sheet
 		for(int sRow=2; sRow<=countofTestScriptRows; sRow++)
@@ -50,13 +50,13 @@ public class ReflectionExecution {
 				countofTestDataRows=ExcelUtilities.setExcelFilePath(scriptPath, "TestData");
 				countofTestDataColumns=ExcelUtilities.setTestDataFilePath(scriptPath, "TestData");
 				
-				for(int i=0;i<=countofTestDataColumns;i++)
+				for(int i=0;i<=countofTestDataRows;i++)
 				{
 					
 					String DataColmn = ExcelUtilities.getCellData(0, i);
 					if(sData.equals(DataColmn))
 					{
-						sData=ExcelUtilities.getCellData(1,i);
+						sData=ExcelUtilities.getCellData(itr,i);
 					}
 					
 					else
