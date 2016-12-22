@@ -11,13 +11,9 @@ public class ReflectionExecution {
 		int countofTestScriptRows=0;
 		int countofORRows=0;
 		
-		
-		
 		//Declaring the path of the Excel file with the name of the Test Script..We will remove the hard coded value afterwards
 		String scriptPath = ".\\ExcelTestFiles\\TestScript.xlsx";
 		String repositoryPath= ".\\ExcelTestFiles\\Object Repository.xlsx";
-		
-		
 		
 		String orlocatorType="";
 		String orlocatorValue="";
@@ -29,10 +25,11 @@ public class ReflectionExecution {
 		
 		int interationCount=Integer.parseInt(ExcelUtilities.getCellData(0, 1));
 		System.out.println("Ineration Count : " +interationCount);
+		
 		for(int itr=1;itr<=interationCount;itr++)
 		{
 		//It means this loop will execute all the steps mentioned for the test case in Test Steps sheet
-		for(int sRow=2; sRow<=countofTestScriptRows; sRow++)
+		for(int sRow=2; sRow<countofTestScriptRows; sRow++)
 		{
 			countofTestScriptRows=ExcelUtilities.setExcelFilePath(scriptPath, "TestSteps");
 			String sPageName = ExcelUtilities.getCellData(sRow, 1);
@@ -40,6 +37,8 @@ public class ReflectionExecution {
 			String sActionKeyword = ExcelUtilities.getCellData(sRow, 3);
 			String sData= ExcelUtilities.getCellData(sRow, 4);
 
+			
+			//Reading TestData
 			if(sData.startsWith("DP_"))
 			{
 				//sData=sData.substring(3); System.out.println(sData);
@@ -48,9 +47,11 @@ public class ReflectionExecution {
 				int countofTestDataColumns;
 				
 				countofTestDataRows=ExcelUtilities.setExcelFilePath(scriptPath, "TestData");
+				System.out.println("countofTestDataRows :"+ countofTestDataRows);
 				countofTestDataColumns=ExcelUtilities.setTestDataFilePath(scriptPath, "TestData");
+				System.out.println("countofTestDataColumns :"+ countofTestDataColumns);
 				
-				for(int i=0;i<=countofTestDataRows;i++)
+				for(int i=0;i<countofTestDataColumns;i++)
 				{
 					
 					String DataColmn = ExcelUtilities.getCellData(0, i);
@@ -61,7 +62,7 @@ public class ReflectionExecution {
 					
 					else
 					{
-						System.out.println("Data not matching");
+						//System.out.println("Data not matching");
 					}	
 				}
 			}
@@ -71,7 +72,7 @@ public class ReflectionExecution {
 			countofORRows=ExcelUtilities.setExcelFilePath(repositoryPath, sPageName);
 			//System.out.println("Count of rows in OR Excel: " +countofORRows);
 						
-			for(int orRow=1; orRow<=countofORRows; orRow++)
+			for(int orRow=1; orRow<countofORRows; orRow++)
 			{
 				String orLocatorName= ExcelUtilities.getCellData(orRow,1);
 				//System.out.println(sLocatorName+"------------"+orLocatorName);
@@ -87,10 +88,9 @@ public class ReflectionExecution {
 			//A new separate method is created with the name 'execute_Actions'
 			//So this statement is doing nothing but calling that piece of code to execute
 			execute_Actions(sActionKeyword,orlocatorType,orlocatorValue,sData);
-		}		
+		}
 	}
 	}
-	
 	
 	
 	

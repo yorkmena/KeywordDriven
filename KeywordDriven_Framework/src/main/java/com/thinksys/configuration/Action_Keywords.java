@@ -73,9 +73,9 @@ public class Action_Keywords {
 		}
 		break;
 		
-		case "clearbrowsercache":
+		case "clearbrowseractions":
 		{
-			clearbrowsercache();
+			clearbrowseractions();
 		}
 		break;
 		
@@ -237,7 +237,7 @@ public class Action_Keywords {
 		System.out.println("Browsers Closed");
 	}
 	
-	public void clearbrowsercache()
+	public void clearbrowseractions()
 	{
 		driver.manage().deleteAllCookies();
 		System.out.println("Browser cache cleared");

@@ -16,11 +16,11 @@ public class ExcelUtilities extends Constants {
     private static XSSFCell Cell;
 
 //This method is to set the File path and to open the Excel file
-//Pass Excel Path and SheetName as Arguments to this method
+//Pass Excel Path and SheetName as Arguments to this method. It returns the number of rows in the sheet.
 public static int setExcelFilePath(String Path,String SheetName) throws Exception {
         FileInputStream ExcelFile = new FileInputStream(Path);
         int iRowNum=0;
-        //System.out.println("ABle to access Excel file");
+        //System.out.println("Able to access Excel file");
         ExcelWBook = new XSSFWorkbook(ExcelFile);
        try {
     	   ExcelWSheet = ExcelWBook.getSheet(SheetName);
@@ -39,15 +39,15 @@ public static int setExcelFilePath(String Path,String SheetName) throws Exceptio
              else
              {
             	// System.out.println("TOtal value of Rows are:- "+iRowNum);
-             }  
+             }
         }
-        return iRowNum-1;
+        return iRowNum;
 }
 
 public static int setTestDataFilePath(String PathofTS,String SheetNameofTestData) throws Exception {
     FileInputStream ExcelFile = new FileInputStream(PathofTS);
     int colCount=0;
-    //System.out.println("ABle to access Excel file");
+    //System.out.println("Able to access Excel file");
     ExcelWBook = new XSSFWorkbook(ExcelFile);
   // try {
     ExcelWSheet = ExcelWBook.getSheet(SheetNameofTestData);
@@ -58,12 +58,10 @@ public static int setTestDataFilePath(String PathofTS,String SheetNameofTestData
            //get the number of cells in the header row
            colCount = headerRow.getPhysicalNumberOfCells();
        }
-       System.out.println("number of cells with data"+colCount);
+       
  
-    return colCount-1;
-
+    return colCount;
 }
-
 
 //This method is to read the test data from the Excel cell
 //In this we are passing parameters/arguments as Row Num and Col Num
