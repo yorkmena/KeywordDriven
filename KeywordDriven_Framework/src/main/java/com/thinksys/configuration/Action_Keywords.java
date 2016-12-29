@@ -41,10 +41,10 @@ public class Action_Keywords {
 		}
 		break;
 		
-		case "selectItem":
+		case "selectItemByValue":
 		{
 			
-			selectItem(locatorValue, locatorType, data);
+			selectItemByValue(locatorValue, locatorType, data);
 		}
 		break;
 		
@@ -73,9 +73,9 @@ public class Action_Keywords {
 		}
 		break;
 		
-		case "clearbrowseractions":
+		case "clearBrowserCookies":
 		{
-			clearbrowseractions();
+			clearBrowserCookies();
 		}
 		break;
 		
@@ -197,7 +197,7 @@ public class Action_Keywords {
 		driver.findElement(By.xpath(locatorValue)).click();
 	}
 	
-	public void selectItem(String locatorValue, String locatorType, String data)
+	public void selectItemByValue(String locatorValue, String locatorType, String data)
 	{
 		By valueOfLocator=locator(locatorType, locatorValue);		
 		WebElement w= driver.findElement(valueOfLocator);	
@@ -237,7 +237,7 @@ public class Action_Keywords {
 		System.out.println("Browsers Closed");
 	}
 	
-	public void clearbrowseractions()
+	public void clearBrowserCookies()
 	{
 		driver.manage().deleteAllCookies();
 		System.out.println("Browser cache cleared");

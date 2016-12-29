@@ -17,6 +17,7 @@ public class ExcelUtilities extends Constants {
 
 //This method is to set the File path and to open the Excel file
 //Pass Excel Path and SheetName as Arguments to this method. It returns the number of rows in the sheet.
+    
 public static int setExcelFilePath(String Path,String SheetName) throws Exception {
         FileInputStream ExcelFile = new FileInputStream(Path);
         int iRowNum=0;
@@ -28,7 +29,6 @@ public static int setExcelFilePath(String Path,String SheetName) throws Exceptio
 	} catch (NullPointerException e) {
 		return 0;		
 	}
-        
         for(iRowNum=0;iRowNum<=ExcelWSheet.getLastRowNum();iRowNum++)
         {
         	 Row r = ExcelWSheet.getRow(iRowNum);
@@ -59,48 +59,62 @@ public static int setTestDataFilePath(String PathofTS,String SheetNameofTestData
            colCount = headerRow.getPhysicalNumberOfCells();
        }
        
- 
     return colCount;
 }
 
-//This method is to read the test data from the Excel cell
-//In this we are passing parameters/arguments as Row Num and Col Num
+
 public static String getCellData(int RowNum, int ColNum){
 	
-	String CellData=" ";
-	int cell_type;
-	
+	String CellData="";
+	Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
       try{
     	  
-      Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-      cell_type=Cell.getCellType();
-      
-      if (cell_type==1)
-      {
+    	  if(Cell==null)
+    	  {
+    	  //Cell.setCellType(Cell.CELL_TYPE_STRING);
+    	  CellData="Empty";
+    	  }
+    	  
+    	  else
+    	  {
+    	  Cell.setCellType(Cell.CELL_TYPE_STRING);
     	  CellData = Cell.getStringCellValue();
-      }
-      else if(cell_type==0)
-      {
-	  
-	  CellData=Cell.getNumericCellValue()+"";
-      }
-      
+    	  }
+    	  
       }
       catch(Exception e)
       {
-    	  CellData="";
+    	  CellData="Empty";
     	  e.printStackTrace();
       }
 	  
-    /* if (CellData.equals(null))
-      {
-    	 CellData="";
-      }*/
-     
       return CellData;
 	}
 
-
-
+public static int getNumericCellData(int RowNum, int ColNum){
+	
+	int CellData=1;
+	Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+	
+	if(Cell==null)
+	{
+		CellData=1;
+	}
+	else
+	{
+	
+      try{
+    	  Cell.setCellType(Cell.CELL_TYPE_NUMERIC);
+    	  CellData = (int) Cell.getNumericCellValue();
+      }
+      catch(Exception e)
+      {
+    	  CellData=1;
+    	  e.printStackTrace();
+      }
+      
+	}
+	return CellData;
+	}
 
 }
