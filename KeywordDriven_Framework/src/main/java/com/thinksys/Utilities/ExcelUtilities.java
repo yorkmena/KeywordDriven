@@ -38,7 +38,7 @@ public static int setExcelFilePath(String Path,String SheetName) throws Exceptio
              }
              else
              {
-            	// System.out.println("TOtal value of Rows are:- "+iRowNum);
+            	// System.out.println("Total value of Rows are:- "+iRowNum);
              }
         }
         return iRowNum;
