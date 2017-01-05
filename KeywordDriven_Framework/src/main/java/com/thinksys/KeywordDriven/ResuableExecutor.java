@@ -7,15 +7,15 @@ import com.thinksys.configuration.Action_Keywords;
 
 public class ResuableExecutor {
 	
-	String sActionKeyword;
+	String sData;
 	String rIteration_range;
 	
-	public ResuableExecutor(String ActionKeyword,String rIteration_range)
+	public ResuableExecutor(String sData,String rIteration_range)
 	{
-		this.sActionKeyword=ActionKeyword;
+		this.sData=sData;
 		this.rIteration_range=rIteration_range;
 		try {
-			readReusable(sActionKeyword,rIteration_range);
+			readReusable(sData,rIteration_range);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,7 +39,7 @@ public class ResuableExecutor {
 	String reusablefilepath;
 	int countofReusableTestStepsrows;
 		
-	public void readReusable(String sActionKeyword, String rIteration_range) 
+	public void readReusable(String sData, String rIteration_range) 
 	{
 		
 		//Read Reusable Iteration
@@ -49,9 +49,9 @@ public class ResuableExecutor {
 		rIteration_count=range_value2-range_value1+1;
 		
 		//This Piece of code will Identify reusable name to be executed.
-		dotIndex=sActionKeyword.indexOf(".");
-		reusableFilename=sActionKeyword.substring(0,dotIndex);
-		reusableName=sActionKeyword.substring(dotIndex+1);
+		dotIndex=sData.indexOf(".");
+		reusableFilename=sData.substring(0,dotIndex);
+		reusableName=sData.substring(dotIndex+1);
 		reusablefilepath=".\\ExcelTestFiles\\Reusable\\".concat(reusableFilename+".xlsx");
 		
 		try {
@@ -108,9 +108,9 @@ public class ResuableExecutor {
 		String rIteration=ExcelUtilities.getCellData(row, 6);
 		
 		//If Action Keyword is a reusable, then this if block will be executed and the rest of the loop will not be executed.
-		if(rActionKeyword.contains(".")){
-			System.out.println("Action keyword contains . ; reusable used in reusable");
-			new ResuableExecutor(rActionKeyword,rIteration);
+		if(rActionKeyword.equalsIgnoreCase("Reusable")){
+			System.out.println("In Reusable sheet "+sData+" another reusable found: "+rData+" with iteration "+rIteration);
+			new ResuableExecutor(rData,rIteration);
 			continue;
 		}
 		

@@ -44,11 +44,10 @@ public class TestEngine {
 			
 			    System.out.println(s_reusable_Iteration);
 			
-			
 			  //Reusable Execution
-					if(sActionKeyword.contains(".")){
-						System.out.println("In Reflection execution Action keyword contains . ; and Reuable Iteration value is:"+ s_reusable_Iteration );
-						new ResuableExecutor(sActionKeyword,s_reusable_Iteration);
+					if(sActionKeyword.equalsIgnoreCase("Reusable")){
+						System.out.println("In TestEngine, Reusable Action is: "+ sData+" and Reuable Iteration value is:"+ s_reusable_Iteration );
+						new ResuableExecutor(sData,s_reusable_Iteration);
 						continue;
 					}
 			
