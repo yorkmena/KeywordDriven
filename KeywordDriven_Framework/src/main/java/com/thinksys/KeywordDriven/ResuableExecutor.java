@@ -10,7 +10,7 @@ public class ResuableExecutor {
 	String sData;
 	String rIteration_range;
 	
-	public ResuableExecutor(String sData,String rIteration_range)
+	public ReusableExecutor(String sData,String rIteration_range)
 	{
 		this.sData=sData;
 		this.rIteration_range=rIteration_range;
