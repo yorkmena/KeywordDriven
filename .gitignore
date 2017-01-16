@@ -1,0 +1,7 @@
+KeywordDriven_Framework/target/
+*.txt
+*.robots
+*.tmp
+KeywordDriven_Framework/ExcelTestFiles/
+*.xls
+*.xlsx
